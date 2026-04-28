@@ -1,0 +1,33 @@
+version: "1.0"
+cluster: "sample-k8s-cluster"
+
+topology:
+  roles:
+    controlplane: "node-role.kubernetes.io/control-plane"
+    etcd: "node-role.kubernetes.io/etcd"
+    worker: "node-role.kubernetes.io/worker"
+
+matrix:
+  internal:
+    - from: "controlplane"
+      to: "worker"
+      ports: [10250]
+      proto: "tcp"
+    - from: "worker"
+      to: "worker"
+      ports: [8472]
+      proto: "udp"
+    - from: "worker"
+      to: "worker"
+      ports: [9500, 9501]
+      proto: "tcp"
+
+  external:
+    - name: "S3-MinIO"
+      from: "worker"
+      endpoint: "s3.example.com:9000"
+      proto: "tcp"
+    - name: "vCenter"
+      from: "controlplane"
+      endpoint: "10.0.0.50:443"
+      proto: "tcp"

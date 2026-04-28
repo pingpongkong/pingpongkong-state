@@ -1,0 +1,22 @@
+version: "1.0"
+node_group: "sample-group01"
+matrix:
+  - description: "MySQL Primary to Replica Sync"
+    from:
+      - "10.50.0.10"
+      - "10.50.0.11"
+    to:
+      - "10.50.0.12"
+      - "10.50.0.13"
+    ports: [ 3306 ]
+    protocol: "tcp"
+  - description: "All DBs must reach K8s API"
+    from:
+      - "10.50.0.10"
+      - "10.50.0.11"
+      - "10.50.0.12"
+      - "10.50.0.13"
+    to:
+      - "10.50.100.1"
+    ports: [ 6443 ]
+    protocol: "tcp"

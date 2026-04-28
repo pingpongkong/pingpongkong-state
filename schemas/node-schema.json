@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PingPongKong Node Matrix Schema",
+  "type": "object",
+  "required": ["version", "node_group", "matrix"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string" },
+    "node_group": { "type": "string" },
+    "matrix": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to", "ports", "protocol"],
+        "additionalProperties": false,
+        "properties": {
+          "description": { "type": "string" },
+          "from": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "to": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "ports": {
+            "type": "array",
+            "items": { "type": "integer", "minimum": 1, "maximum": 65535 },
+            "minItems": 1
+          },
+          "protocol": { "type": "string", "enum": ["tcp", "udp", "icmp"] }
+        }
+      }
+    }
+  }
+}

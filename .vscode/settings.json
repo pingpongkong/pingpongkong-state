@@ -1,0 +1,12 @@
+{
+  "yaml.schemas": {
+    "./schemas/k8s-schema.json": "k8s/*.yaml",
+    "./schemas/node-schema.json": "node/*.yaml",
+    "./schemas/notification-schema.json": "notification/*.yaml"
+  },
+  "yaml.customTags": [
+    "!reference sequence"
+  ],
+  "yaml.validate": true,
+  "editor.formatOnSave": true
+}

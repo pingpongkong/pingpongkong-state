@@ -1,0 +1,69 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "PingPongKong Notification Schema",
+    "type": "object",
+    "required": [
+        "version",
+        "provider",
+        "webhook",
+        "rate_limit"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "version": {
+            "type": "string"
+        },
+        "provider": {
+            "type": "string",
+            "enum": [
+                "discord",
+                "slack",
+                "teams"
+            ]
+        },
+        "webhook": {
+            "type": "object",
+            "required": [
+                "env_var"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "env_var": {
+                    "type": "string"
+                }
+            }
+        },
+        "display": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "avatar_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "rate_limit": {
+            "type": "object",
+            "required": [
+                "max_notifications_per_minute",
+                "repeat_interval_minutes"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "max_notifications_per_minute": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 60
+                },
+                "repeat_interval_minutes": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1440
+                }
+            }
+        }
+    }
+}

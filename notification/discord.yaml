@@ -1,0 +1,16 @@
+version: "1.0"
+provider: "discord"
+
+# Authentication
+webhook:
+  env_var: "DISCORD_WEBHOOK_URL"
+
+# Display Settings
+display:
+  username: "PingPongKong"
+  avatar_url: "https://example.com/kong-avatar.png"
+
+# Prometheus-style Rate Limiting & Throttling
+rate_limit:
+  max_notifications_per_minute: 5
+  repeat_interval_minutes: 30
