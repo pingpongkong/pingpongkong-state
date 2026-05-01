@@ -96,7 +96,7 @@ Kubernetes matrices use **Role Labels** (`node-role.kubernetes.io/xyz`) for dyna
 version: "1.0"
 cluster: "sample-k8s-cluster"
 topology:
-  roles:
+  node-labels:
     controlplane: "node-role.kubernetes.io/control-plane"
     worker: "node-role.kubernetes.io/worker"
 matrix:

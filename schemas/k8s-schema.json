@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "PingPongKong K8s Matrix Schema",
   "type": "object",
-  "required": ["version", "cluster", "topology", "matrix"],
+  "required": ["version", "cluster", "environment", "description", "topology", "matrix"],
   "additionalProperties": false,
   "properties": {
     "version": { 
@@ -11,12 +11,18 @@
     "cluster": { 
       "type": "string" 
     },
+    "environment": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
     "topology": {
       "type": "object",
-      "required": ["roles"],
+      "required": ["node-labels"],
       "additionalProperties": false,
       "properties": {
-        "roles": { 
+        "node-labels": { 
           "type": "object", 
           "additionalProperties": { "type": "string" },
           "minProperties": 1
@@ -25,13 +31,14 @@
     },
     "matrix": {
       "type": "object",
+      "required": ["internal", "external"],
       "additionalProperties": false,
       "properties": {
         "internal": {
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["from", "to", "ports", "proto"],
+            "required": ["from", "to", "ports", "protocol", "action", "description"],
             "additionalProperties": false,
             "properties": {
               "description": { "type": "string" },
@@ -42,7 +49,8 @@
                 "items": { "type": "integer", "minimum": 1, "maximum": 65535 },
                 "minItems": 1
               },
-              "proto": { "type": "string", "enum": ["tcp", "udp", "icmp"] }
+              "protocol": { "type": "string", "enum": ["tcp", "udp", "icmp"] },
+              "action": { "type": "string", "enum": ["allow", "deny"] }
             }
           }
         },
@@ -50,14 +58,15 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": ["name", "from", "endpoint", "proto"],
+            "required": ["name", "from", "endpoint", "protocol", "action", "description"],
             "additionalProperties": false,
             "properties": {
               "description": { "type": "string" },
               "name": { "type": "string" },
               "from": { "type": "string" },
               "endpoint": { "type": "string" },
-              "proto": { "type": "string", "enum": ["tcp", "udp", "icmp"] }
+              "protocol": { "type": "string", "enum": ["tcp", "udp", "icmp"] },
+              "action": { "type": "string", "enum": ["allow", "deny"] }
             }
           }
         }
