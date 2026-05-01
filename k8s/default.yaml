@@ -63,4 +63,24 @@ matrix:
       action: "allow"
       description: "Allow monitoring systems to scrape Cilium metrics"
 
-  external: []
+  external:
+    - name: "Worker Google DNS UDP"
+      from: "worker"
+      endpoint: "8.8.8.8:53"
+      protocol: "udp"
+      action: "allow"
+      description: "Workers can reach Google DNS over UDP"
+
+    - name: "Worker Google DNS TCP"
+      from: "worker"
+      endpoint: "8.8.8.8:53"
+      protocol: "tcp"
+      action: "allow"
+      description: "Workers can reach Google DNS over TCP"
+
+    - name: "Control-plane Google DNS UDP"
+      from: "controlplane"
+      endpoint: "8.8.8.8:53"
+      protocol: "udp"
+      action: "allow"
+      description: "Control-plane can reach Google DNS over UDP"
