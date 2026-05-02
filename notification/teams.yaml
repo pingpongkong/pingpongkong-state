@@ -1,0 +1,18 @@
+version: "1.0"
+provider: "teams"
+
+# Authentication
+webhook:
+  env_var: "TEAMS_WEBHOOK_URL"
+
+# Display Settings
+# Note: current Teams sender only posts {"text": "..."}.
+# username/avatar_url are accepted by config schema but not used for Teams payloads.
+display:
+  username: "PingPongKong"
+  avatar_url: "https://example.com/kong-avatar.png"
+
+# Prometheus-style Rate Limiting & Throttling
+rate_limit:
+  max_notifications_per_minute: 5
+  repeat_interval_minutes: 30
